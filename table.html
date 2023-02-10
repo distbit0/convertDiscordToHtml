@@ -1,0 +1,1934 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Username</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K-Aizen</td>
+      <td>GM</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>Btw this channel is to ask the team any questions you might have about the whitepaper / brainstorm</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>Moving the whitepaper to this channel</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>is it fair to think of the LP as the liquidator who would be fine owning the asset if price went down?</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>and they kinda do own the asset if the price goes below the range but then the liquidation discount is how long the user/trader chooses to keep the trade open (i.e. the borrowing fee)</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>The way I see it the LP has set a certain range, similar to a univ3 position and those taking on margin are basically fractionalised in that range</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>So the bigger the capital in a range the more margin others cna take on</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>well when price falls below the range in traditional perp markets there would be a liquidation, but here the LP Is happy to hold the asset below the range</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Yes similarly to a univ3 lower bound</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>so the LP is acting as a liquidator.</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>and just holding on to the asset</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>instead of selling spot</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>When it falls below you hold that asset at the lower bound</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>The strike price is like the lower range</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>yes kind of!</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>that's also what impermanent loss is</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>yeah! i think of LP'ing as bids and asks set across the range</td>
+    </tr>
+    <tr>
+      <td>krane</td>
+      <td>but with infinity pools there's like a implicit liquidation</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>LPing is for standard concentrated liquidity, as in Uni.v3, so the LPer already expects to have reserves in token0 (think eg. ETH) when the pool price is below their range, and have reserves in token1 (think eg. USDC) when the pool price is above their range. This implies there is no liquidation at all: if the trader has the opposite token as collateral, this is necessarily more valuable than the reserves expected by the LPer (eg. ETH is more valuable if the market price is high, and USDC is more valuable if the market price is low).</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Awesome that’s how I understood it too</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Initially it was a bit hard to grasp in the whitepaper as the first part says $900 range but a range is 2 prices, but later on it becomes clear what’s meant</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Is the liquidity also aggregated?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>if LPs have set ranges which overstep eachother</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>yea right?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>I think what's novel here is that this allows other people to capitalise on existing liquidity when it's out of the range, which in turn also brings additional yield to the LP (who would otherwise no longer be getting anything out of the range)</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>instead of just sitting there inefficiently</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>am I understanding it right?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>That's exactly right: LPs have yield even if the pool price remains outside their range.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, for sure - traders will borrow from all LPers which have liquidity in the range borrowed from.</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>yeah to add on to pierre's reply, you can combine different liquidity ranges to create the leverage multiple you want</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>eg. you can create 10x leverage with liquidity ranges at the 850 USDC tick and 950 USDC tick in the first example</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>obviously all of this is abstracted away from end user and done automatically by the protocol</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>awesome, that's great thanks a lot for the responses</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>so basically when you enter the position the margin or collateral you have to put in is basically the difference between the current price and the lower or upper (depending on position direction) range of the most optimal LP you've been matched based on the leverage and size you want?</td>
+    </tr>
+    <tr>
+      <td>decoco</td>
+      <td>I read the documentation. Very well done!</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>perhaps easier to think about this as: \n- a trader has 100 USDC in collateral\n- they want to go long 1 ETH (current price of 1000 USDC)\n- so they need to borrow 1000 USDC (=10x leverage)\n- protocol looks at what liquidity is available + offers best interest rate to offer that 10x leverage (eg. liquidity at 850 USDC tick and liquidity at 950 USDC tick)\n- protocol combine those ticks to create the leverage + trade size trader wants</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>hope that answered it</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>lmk if not</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Yea, I think we’re saying the same thing in different ways 🤔</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>But to be sure</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>In that particular scenario, and let’s say those were the only pools available at the time and the optimally matched ones - would the min collateral for those conditions be $50?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>So he could 20x then</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Hmm actually i think no</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>How is the min collateral needed calculated ig would be my question</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>you always get exactly the leverage you ask for</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>leverage ≈ market price / (market price - strike price)</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>and here strike price is a combination of the ticks you borrow</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>so you can combine liquidity ranges at the 850 USDC and 950 USDC ticks to create a strike price of 900 USDC</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>and btw min collateral is just trade size / leverage</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>since you get exactly the trade size and leverage you want, the min collateral is also predetermined</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Ah so it would be the difference between current price and strike price here</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>I was just assuming strike would be one of the ticks</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>But it can be a combination</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, strike is a weighted average of all the liquidity ranges you are borrowing.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>That would be the min</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Makes sense! Thanks a lot!</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Super cool</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Ok so what if I as an LP decided I wanted to remove liquidity, but at the same time ppl have taken positions? If there’s enough liquidity in the platform ig it shouldnt be an issue but what happens in that scenario?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Is there time involved?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>That's right, there is a schedule over which loans mature (half of the position per day), so for sure the liquidity can be removed at that rate. This is the worst case though, and using the liquidity which is not currently borrowed it can happen faster than that.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Also, a liquidity provider can stop LPing immediately, by borrowing the same liquidity range as what they have in the pool, if they want. That route does incur the borrow cost though, so it is best used only if the LPer has some urgent need (faster than a day) for their tokens.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>makes sense yea! Also it's safe to assume that all positions will be controlled by the protocol (eg. similar to gearbox), right?</td>
+    </tr>
+    <tr>
+      <td>bodiesm</td>
+      <td>Good documentation!</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The collateral/reserves for all positions remains under the protocol's control, yes.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>👍. Will pairs and pools thereof be isolated from one another? As in users taking positions in eth/usdc are isolated from users taking positions in link/usdc?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>yea there's no way they wouldn't be</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Sorry for asking so many questions lol, just trying to debunk everything</td>
+    </tr>
+    <tr>
+      <td>hazucf</td>
+      <td>^these are great questions, i've really enjoyed the discussion 🙂</td>
+    </tr>
+    <tr>
+      <td>Ygadai_Kto</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>No no, keep them coming. You're really asking the central questions.\nEach token pair will indeed have its own pool - no interaction between them. Could envisage a tighter integration between InfinityPools for different pairs in the UI in future, but basically separate there as well at this stage.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Thanks sers, really enjoying it as well!</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>yea it should be safer like that too, since in the paper it says the protocol would be permissionless meaning anyone could deploy pools for any token, so if they were too launch something malicious it would only affect the liquidity in that isolated pair. Apart from isolation (which should be enough) have you thought of other countermeasures?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>We've pre-empted a number of attack scenarios (MEV or otherwise), for sure. Which one(s) did you have in mind?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>An example attack could be someone launching a malicious erc20 which for instance has sells disabled/under a whitelist. With minimal collateral one could transfer the legitimate asset of the pair (eg. eth) to the pool of the outside spot dex. The malicious asset cannot be turned back into eth so it could effectively drain that specific pool. Since the pools are isolated, it will not affect all the other eth in the protocol but only that specific isolated pool. So I guess it's up to the user to do their proper DD before providing liquidity. Same way one shouldn't blindlessly buy any token on uniswap</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>does that make sense? &lt;:PES_Think:639363477458255874&gt;</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes. If it is the case of a malicious token, the onus is indeed on traders/LPers who are choosing to hold it. Same as if a stablecoin turns out to be a rug pull - nothing a pool can do about that. There will be no contagion from a bad token in any case, as you said.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>Yea I guess if the pool deployment is permissionless, the only thing you can play around with here is how things are displayed on the UI and pool analytics showing valuable data.</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>I think that’s all I have for now, really enjoyed the convo - thanks again! \nLooking forward to testing out the product, it sounds really exciting</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>WHat happens if all Concentrated liquidity is borrowed? and everyone is long and price moons? = LP's rekt?, so its sort of a GLP based venue, but then uses permissioned concentrated liquidity zones. How can ppl trade in the AMM if all liquidity is locked/borrowed for each zone?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>is there some sort of dynamic fee based on utilisation?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>I guess traders will be the holders of the borrowed LP-positions though, so I guess its just a scaling issue at start?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>Are there any other protocols that make use of borrowing LP positions? doesnt morpho-labs also do something that converts LP-positions with zapper to unbundle/bundle LP-tokens?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>ARe there any initial thought on how this improves payoff for Uni V3 LP'ers?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>and arent there any composability issues, with differences in LP-tokens? or is this all taken care of?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>wen testnet? i need to try dis</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>they wouldn't be rekt because they would have exposure to the ppl winning (those who are longing and price is going up) through the interest accrued. If they were to use standard concentrated liquidity amm e.g like univ3 they would be getting nothing as they'd just be fully out and just holding an asset</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>Yes but all their PnL is taken up by the ppl winning</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>so infinity pools makes use of sitting liquidity as oppose ot others</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>they only get fees voer that which still is an improvement, but as soon as they close entire position of your 100% LP position</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>it's not</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>ah wait im brainfarting indeed</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>if you were in univ3 you'd be in a worse position</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>you set your own ranges right</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>this basically makes your capital useful even when it goes out of your range</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>then you can move it/switch up those ranges later</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>if 1000 LP pos. eth goes to lets say 10k (10x), LP closes at 10k, pays of 1k to LP'er and captures 9k-fees or is there somehow shared PnL between LP'er and borrower?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>Yeh this I udnerstand</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>oh wait is the LP-pos then also increased to 5k? (50:50), and thus LP-borrower has to pay 5k?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>the borrower has to pay the upper bound of the range + interest and fees back to the LP if the price has mooned</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>that's how i understand it</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>fuck lower/upper bound jargon, we need examples for retards like me xD</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>ok so you put 1 eth in at the range $1000 (lower bound)- $1500 (upper bound)</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>someone borrows it</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>price moons to 2k</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>But I think its basicallyt whaty I said right, was brainfarting on Value of LP position on T=0 and value of LP-position at T=1 (at settling of lending/borrowing)</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>at 1.5k you're fully in usdc</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>and 1k ur fully in eth</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>Yes i understand</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>so the borrower would need to pay 1.5k + interest and fees, he gets to take the profit as he took risk to go long</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>you as an LP could always switch up your ranges or direction bias</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>mhh wasnt it 1250? as its average of the total range</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>if the price is at 2k</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>it would be the upper one I htink?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>but isnt if someone borrows your LP concentrated pos. between 1k-1.5k, average is 1250 no?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>or is it aggregating all the upper bounds of multiple conc. liq. positions?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>well it also depends on what market price was at the time of borrowing</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>and yea it would be aggregating different LP positions and offering the best conditions for ur size and leverage</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>that's how I understood it so far</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>we just have a whitepaper, let's see more once more docs and testnet are live haha</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>will be cool to play around with and give more feedback</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>I see, yeh the upper bound does make sense for max PnL basically</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>thanks anyway, appreciate it a lot Subzero ❤️</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>thanks as well!</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>So LP' ers are bound to their LP-position for the duration of the time that borrower has it open, correct?. i.e. they cannot close their LP-position while the loan is open, and only one who can close it is the borrower, or protocol in case of collateral&lt;margin etc? or can LP' ers buy off the LP basically</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>https://discord.com/channels/1070477782922035210/1071050376217899038/1072198289686011944</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>makes sense</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>I asked that too, here's the answer</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Thanks &lt;@294444589249462272&gt;! Just made you a lifeguard 😉</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>&lt;a:PoggersHype:503717560588566538&gt; I'm honoured, thanks a lot ser</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>Small tweak to the whitepaper:</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>For those who have already read the earlier version, the only difference is the middle paragraph of the Maturity Profile section, which is now expanded to two paragraphs. Earlier version of that paragraph was accurate, however people found it too brief to convey the full explanation. Hopefully clear now - feedback welcome!</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>i havent read the whitepaper but im still gonna ask a question:\nu can tell at any given time how much lp tokens a position is worth right, and once its about to go under he gets liquidated, that wouldnt need an oracle right? is that how it works</td>
+    </tr>
+    <tr>
+      <td>Burgerflipper</td>
+      <td>The whitepaper gave me a hard one, keep it coming guys.</td>
+    </tr>
+    <tr>
+      <td>goldenes__braun(die erste)</td>
+      <td>maybe</td>
+    </tr>
+    <tr>
+      <td>goldenes__braun(die erste)</td>
+      <td>&lt;:thinkFish:851582798426931210&gt;</td>
+    </tr>
+    <tr>
+      <td>Prooflol</td>
+      <td>Where can I read about the team behind the project?</td>
+    </tr>
+    <tr>
+      <td>!tsvetochkov</td>
+      <td>The information provided does not mention a specific forced return mechanism in InfinityPools. The article focuses on how InfinityPools provides "good leverage" and is a two-sided marketplace with traders and liquidity providers. The benefits of the protocol are described as the elimination of counterparty risk and the ability for traders to have unlimited leverage. What do you can provide about return?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes -  better though, because while an LP range is on loan, it is at all times backed by reserves which are sufficient to recreate the LP range in the pool. Therefore no possibility to go under, and no liquidation at all.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Is this what you had in mind?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>So the pool is a guarantor for the return?</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>what i didnt understand in the medium, does the provider expect back X lp tokens or does he expect back lp tokens worth Y?</td>
+    </tr>
+    <tr>
+      <td>!tsvetochkov</td>
+      <td>I mean the forced return mechanism</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The liquidity provisioning works similarly to Uni.v3, so the LPer expects the reserves backing their LP token back, plus a yield. The yield in InifnityPools though is from lending interest in addition to swap fees.</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>is there any incentive to force traders to get their col swaped into? this is just pure naive speculation from my part: but maybe u could get a giant flashloan, dump hard, jit, let all traders buy with their col, jit out, collect fees?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Would it be possible to use infinitypools as a regular DEX or is it a borrowing and leverage only story ?</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>well question is if fees collected + swap back is enough to pay back the flashloan kekw, probably not</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>As I understand it there is a pool for this as a guarantor!?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>It seems not) because to exchange LP to conditional ETH and then to conditional USDC you have to use any DEX you want. So it was written in the article</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The return in that chart comes from the trader correctly betting that the spot market will move up over the week. In the 4 cases, the same scenario is considered: long position + market moves up with Sharpe ratio of 1. You might expect all trades to be profitable, but this fails quite badly in the perpetual case due to liquidations. In addition InfinityPool also allows for trades that go much beyond the 20x leverage ratio - not possible on dydx, which is the perp market looked at specifically (other perps generally have lower max. leverage in any case).</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes - liquidity in InfinityPools offers both regular DEX spot swaps, as well as borrowing for leverage.</td>
+    </tr>
+    <tr>
+      <td>!tsvetochkov</td>
+      <td>Understood, thx</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Wow, that's great sir</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>&lt;@971895533293699072&gt; where are u guys donna host testnet? goerli?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>&lt;@971895533293699072&gt; Thank you for answering perhaps silly questions but they are at the beginning of the war very, bear with us&lt;:pepoEZ:1072138695441928302&gt;</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>JIT cannot be done on InfinityPools actually 😉</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Still open. Any preferences from your side?</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>goerli bec thats the only place i have enough testnet eth of &lt;:altkek:667559551335399445&gt;</td>
+    </tr>
+    <tr>
+      <td>losha</td>
+      <td>or do it like andre, test in production</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>😂</td>
+    </tr>
+    <tr>
+      <td>frozke</td>
+      <td>Lol same to me.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Noted</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>&lt;@971895533293699072&gt; How will the test be at the end of February/beginning of March? Public/private?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>On which circuits will start and which circuits will take priority?</td>
+    </tr>
+    <tr>
+      <td>keozz</td>
+      <td>Polygon Mumbai is also a good one.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Arbitrum Rinkeby testnet?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, public testnet ETA is end of this month or early March.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Planning to deploy on l2 networks?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Plan is currently for first production deployment on L2, followed by L1 soon thereafter.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Cool</td>
+    </tr>
+    <tr>
+      <td>wagmi</td>
+      <td>How can I read the whitepaper?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>it's the pinned message for this channel</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>wagmi</td>
+      <td>got it thanks!</td>
+    </tr>
+    <tr>
+      <td>wagmi</td>
+      <td>ah I see, so this protocol is similar to panoptic, in that it takes the other side of the payoff of univ3 positions</td>
+    </tr>
+    <tr>
+      <td>wagmi</td>
+      <td>pretty cool</td>
+    </tr>
+    <tr>
+      <td>rleifke</td>
+      <td>Cool paper</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>hmmm i would actually say we're pretty different</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>for multiple reasons</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>biggest one obviously being they're an options protocol and we're a defi native new financial primitive</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>that said, big fan of their work too!</td>
+    </tr>
+    <tr>
+      <td>ChrisBender</td>
+      <td>levered shorts are possible too, right? by borrowing a LP token above spot price and selling for quote asset? didn't see this mentioned</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>absolutely</td>
+    </tr>
+    <tr>
+      <td>dankcoldturkey</td>
+      <td>Hey guys-  where can I get more information on how the “no liquidation” mechanics could work? I don’t follow from the medium article</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Have you checked the whitepaper (pinned in this channel)</td>
+    </tr>
+    <tr>
+      <td>dankcoldturkey</td>
+      <td>Didn’t see it pinned, thanks</td>
+    </tr>
+    <tr>
+      <td>Ullrich "Der Junge"</td>
+      <td>sers any reason not to upload the whitepaper to docsend or other similar service?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>we wanted ppl to join our discord initially</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>but yeah will be uploading it to our website tomorrow</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>Just read the medium, about to read the paper. Awesome idea.</td>
+    </tr>
+    <tr>
+      <td>InfiniteVectors</td>
+      <td>Will this project have a token?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>pls whitepaper talk only in this channel!</td>
+    </tr>
+    <tr>
+      <td>InfiniteVectors</td>
+      <td>Sorry ser</td>
+    </tr>
+    <tr>
+      <td>InfiniteVectors</td>
+      <td>Whitepaper written in LaTeX bullish jk</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>I'm still parsing through/rereading the whitepaper, so far looks interesting. I read a comment above which said "since you get exactly the trade size and leverage you want, the min collateral is also predetermined." What does this mean practically? If I want, for example, to open a trade with 1000x leverage at a strike price for ETH of 1000 usd, what are the chances the min collateral will be X dollars? Is it based on how much liquidity is provided at that price?</td>
+    </tr>
+    <tr>
+      <td>Marioy</td>
+      <td>To complete the contract through LP splitting, I think the idea is great, but how to ensure a large number of LPs is a problem</td>
+    </tr>
+    <tr>
+      <td>Kenton | sense.finance</td>
+      <td>nice seeing you here ser</td>
+    </tr>
+    <tr>
+      <td>Kenton | sense.finance</td>
+      <td>just skimmed the whitepaper, will dig in this weekend</td>
+    </tr>
+    <tr>
+      <td>Golding | Delphi</td>
+      <td>Where do i get the whitepaper</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>pinned to this channel</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>not sure i understood first part of your sentence</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>but imo LPs will be very very well compensated in InfinityPools</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>retail has a tendency to overpay for leverage</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>1000x leverage here would have a strike price of 999 USDC if the market price of ETH is 1000 USDC</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>keep in mind the infinityPools strike price is different from options strike price</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>and the min collateral will always be based on leverage selected and position size</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>so if position size is 10,000 USDC and 1000x leverage is selected then min collat without interest is 10 USDC</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>then the amount of liquidity in the pool will limit the max position size but that will trigger high utilization rates (similar to aave) which in turns will attract more LPs</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>nice lil virtuous cycle</td>
+    </tr>
+    <tr>
+      <td>JackLuo</td>
+      <td>got it\</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>this seems too good to be true 😂  love what's happening here.</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>thanks for the replies</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>ofc 🙂</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>oh I also saw in the whitepaper that the highest lev mentioned is 2000x</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>practically speaking that is the limit rn</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>if we decrease tick spacing then that number grows</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>so that's the current limitation</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>inb4 10,000x leverage &lt;:PES_EvilRondo:647054811002306561&gt;</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>&lt;:4208heaven:1072138628672782416&gt;</td>
+    </tr>
+    <tr>
+      <td>RayC</td>
+      <td>Still do not understand the Swappers design, if traders borrowed the liquidity ETH/USDC and then long ETH which swapped USDC to ETH. And when the ETH price is down 900 at predetermine price, where does the liquidity come from for liquidation?</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>so in this case, I have a 10,000 usdc position, have 10 usdc collat. If I'm understanding the whitepaper right I can hold this position indefinitely (assuming I've paid/paying all fees) and will never get liquidated?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>as long as you paid the interest on that, you can keep the position open no matter where the price goes</td>
+    </tr>
+    <tr>
+      <td>DIVEN37</td>
+      <td>Guys where can I read the whitepaper?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>its pinned to this channel</td>
+    </tr>
+    <tr>
+      <td>DIVEN37</td>
+      <td>I can’t see it🥲</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>and if I want to close this position out in the red I'll simply lose some portion of the collat?</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>https://canary.discord.com/channels/1070477782922035210/1071050376217899038/1072591484278280273</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>so there is no need for an oracle, but im sure that you cannot do this kind of mechanic on *any* univ3 pool. there has to be some minimum liquidity available right?</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>im curious what the minimum requirements are for a market like this</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>once the price of ETH drops below 900 USDC the liquidity provider is expecting back ETH rather than USDC, so basically the LP is the one doing the "liquidation"</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>surprisingly not that high</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>we're eventually going to launch on ETH mainnet</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>awesome</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>can i dm ser</td>
+    </tr>
+    <tr>
+      <td>DIVEN37</td>
+      <td>Thanks!</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>yup</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>ofc</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>we can do this on ANY asset 🙂</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>yeah</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>honestly absolutely love oracle-less defi</td>
+    </tr>
+    <tr>
+      <td>indigo</td>
+      <td>automatically makes me interested</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>I do most trading on arb because of the lower fees. Will trading on this platform cost whatever eth gas is at that moment, or will there be some kind of gasless trading?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>still deciding where to initially launch yes</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>leaning towards L2s</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>Personally I think L2 is the way. Happy to hear you're considering it</td>
+    </tr>
+    <tr>
+      <td>hazucf</td>
+      <td>this is the way &lt;a:babyyodasoup:967114256128569344&gt;</td>
+    </tr>
+    <tr>
+      <td>RayC</td>
+      <td>It was at some point not easy to understand. If LP is the liquidator, then Borrowers only get the origin LP ETH/USDC and are responsible for Swap USDC to ETH. And then where does liquidity come for swap?</td>
+    </tr>
+    <tr>
+      <td>Daedalus</td>
+      <td>Was there an equation in the whitepaper for fees when opening/closing a position? I didn't see one.</td>
+    </tr>
+    <tr>
+      <td>RayC</td>
+      <td>It was like traders borrow ETH/USDC LP with 50%/50%, and how can the trader Long 100% ETH?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>going to bed for a while so may not answer Qs for a bit but im sure one of my fellow teammates will jump in here soon</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>you can use any DEX to swap in and out of positions</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>very cool feature of ours actually</td>
+    </tr>
+    <tr>
+      <td>RayC</td>
+      <td>Okay, night guys.</td>
+    </tr>
+    <tr>
+      <td>dominik0</td>
+      <td>gm, would be great to link the white paper in &lt;#1070522471146602516&gt;</td>
+    </tr>
+    <tr>
+      <td>Pibbles</td>
+      <td>gn ser</td>
+    </tr>
+    <tr>
+      <td>Ullrich "Der Junge"</td>
+      <td>ser but i dont want to be sending (random) PDFs on groupchats. would rather send a link 🫡</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>Hey just take a glance at white paper, its a very interesting concept!  I have a few questions related to "swapper":\n\nWhen will swapper being created, when taker make a trade and protocol will create one swapper from the available liquidity? What's the life cycle of a swapper? \n\nWhat's the relationship behind swapper and taker? Is swapper similar to taker position? \n\nCan taker own multiple swappers for the same strike price? Can trader change strike price by adding more collateral or reduce position?</td>
+    </tr>
+    <tr>
+      <td>Mahesh</td>
+      <td>just read medium article very much excited</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>When borrower close her fixed term loan, does the liquidity add back to pools so others can borrow? Or it needs to wait until it expired even the borrower already take profit?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Typically to go long, a trader will borrow an LP with 100% USDC, then they can use any DEX (including the InfinityPool spot DEX itself) to swap that over to 100% ETH.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Fixed term loan cannot be closed early, while revolving loan can at any time. So for fixed term, the liquidity goes back into the pool at the time of expiry, not when the borrower takes profit. Revolving loan liquidity goes back immediately.</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>Hello</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>great concept</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>however, I think there's a significant big question mark</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>it seems like the concept would only work if the LP's will not withdraw their assets from the token</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>Where do you expect to find these LPs?</td>
+    </tr>
+    <tr>
+      <td>Kaiju.Busta</td>
+      <td>Theoretically, you could use the governance token to pump up the supply, but eventually, if there's no real demand, how do you expect to sustainably grow the protocol?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Swapper is created when borrowing the LP range. A trade usually involves exchanging the reserves of the swapper at the start, and the swapper is already created by then. Then the swapper matures continuously, so it eventually disappears that way.\nThe swapper is what the trader holds for leveraged exposure to the pool's asset. No restrictions on how many swappers a trader can hold, including for same strike.\nA swapper strike price cannot be changed. For a revolving loan there will be an operation to shift the strike, but that is actually paying back the original swapper early and creating a new one.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>It seems to me, too, that a document is more effective not in PDF, but in, say, google doc</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>&lt;@971895533293699072&gt; hi fren. What do you think about moving your WP to https://www.gitbook.com/ ?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>LPers can withdraw at the same rate as loans mature, which is a rate of half of the notional per day. The impact withdrawal has is on the interest rate for future loans - no impact on any open position.\nLower liquidity means higher utilisation ratio, so higher interest rates and yields, incentivising more LPing. So the liquidity level is self-stabilising.</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>Thanks! One more question, from whitepaper high-level overview scenario b: if univ3 mid-priced is 901, above strike price 900, when close position, 1 eth trader hold need to swap to at least 900 usdc, but if the slippage makes it only able to swap to 899 usdc,and there's only 100 usdc collateral but it needs 1000 usdc to repay, what will happen?\n\nI guess the trader will stuck and need to wait for the slippage get lower, or if uni v3 mid price down below 900 then trader can add eth back like scenario c? \n\nBut what if scenario c also stuck because slippage? Eg when the protocol tries to swap traders 100 usdc to 0.11 eth but fail due to slippage?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>It was actually written on Google Docs originally, haha. LaTeXified PDF does look very good, so not planning to go back there, We will have docs as well later, which you can expect to go into even more detail, and those will be in Gitbook or equivalent format.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>I get it. Great news, looking forward to more useful information from you&lt;a:1649pepehappychat:1072138617578852433&gt;</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>It seems to me that this is only relevant when the trader needs to pay off the debt for the LP received. The trader receives LP which he exchanges to ETH and then to USDC and he has to take into account the slippage.\n\nBut in case of LP redemption, as I understand it, he can redeem both in ETH and USDC and there is no need to change tokens to lose part of commission on exchange. (It seems so to me)</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>What is nice here is that the trader does not have to do this final swapping themselves, they just return reserves/collateral to the protocol, and the protocol does any swapping required to put liquidity back into the float pool (float pool being InfinityPools' underlying spot DEX).\nThe protocol can always do this, irrespective of slippage, because the price used for swapping is the float pool price, which is the price which determines what reserves the liquidity needs. So eg. in your first scenario, slippage can happen down to 900 (all fine up to then as there is collateral to cover it), and then it's even easier because the trader returned ETH and below a float pool price of 900, the liquidity (whose range was at 900) requires ETH as reserves, so no swapping needed.</td>
+    </tr>
+    <tr>
+      <td>Adrianzy</td>
+      <td>GM! Just read the whtiepaper and am very intrigued by what you guys are building. &lt;@114158663467401225&gt; &lt;@971895533293699072&gt; can I shoot either of you a DM to learn more? I am with a web3 studio/fund and would love to see if there's any opportunity to collab</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Sure. Feel free to send DM my way.</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>If float pool price was 901 so protocol need to swap 1eth to usdc, but if the swap also happened in float pool, float pool price will go down after the swap, and if after the swap the price is 900 then the protocol need to swap the 1 eth back to usdc but then price go up to 901 which goes back to the beginning, will it cause a infinity loop?\n\nSpeak of float pool, will it be another uni like dex,or using the uniswap v3 pool liquidity? According to whitepaper it seems like another pool but why don't you use the existing liquidity from univ3?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Right, that's the logical follow-up question 🙂 There is no such circularity because the swapping for expiry/maturation actually happens in continuous time, so there is never a price jump which needs to be partially undone after the fact.\nHow is this done on-chain, which is discrete time? Well any computer is discrete time anyway - the continuous process defines a differential equation which actually has an explicit solution, so you can use that to advance time when needed (ie. for every new block where there is a transaction).</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The float pool is very similar to Uni.v3, but with some useful enhancements in its own right. Main one I would highlight is there is a single InfinityPool (so single float pool) per token pair: no liquidity fragmentation across 1%, 0.3%, 5bp, 1bp fee levels. The float pool has an adaptive fee strategy to enable this. Also meaning LPers don't have to waste their time and capital in a pool with poor yield, due to the fee level being inadequate.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>&lt;:8858pepe15:1072138669026197514&gt;</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>gmgm, trying to better understand infpool.... why does the WP state liquidations of collateral aren’t necessary if borrower owes perpetual interest rate payments? \n\nEventually your collateral gets drawn down to less than what you owe or you fail to post the payment no?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>That's handled by the trader choosing a timeframe/deadline up until which to provide tokens for interest payment. This is perpetual for as long as the trader renews, to push the deadline into the future - otherwise the position is closed when due.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>This is automated through the UI by the way, I'm just describing the contract behaviour on-chain.</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Now that's cool that you don't have to do any extra manipulation🫡</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>For the trader in high level overview who take 1 eth long position with 100 usdc collateral at price 1000, if he didn't recover his position in a day, half of the position (0.5 eth) will be unwind. Since it mature on a continuous basis, I assume keeper can send a TX to swap 0.5 eth back to usdc if its above the strike price 900? If so, how should trader do if he want to maintain his exposure? At the end of "4. Maturity profile" how trader can "grow its notional back" if he didn't replenish his position before keeper settle his position and also price move?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>So assuming the price remains above 900 in the course of the day, half of the position will be unwound, leaving the trader with ETH: worth more than 100 USDC if the price was above 1000, or worth less otherwise. Then replenishing after one day means getting a new loan (half the size of the initial one), so the token swapping required is actually USDC to ETH still. Keep in mind for this swap any DEX can be used, so global chain liquidity is available. Also, the collateral can actually be provided in ETH directly, rather that USDC, so no swapping needed there. Actually ETH collateral is more natural for going long, but the explanation is easier with USDC collateral (which can be used as well), which is why that case is used in the High Level Overview.</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>good idea, will make a link to our whitepaper today</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>ahh got it thx</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>curious if InfinityPool team has gotta any economic risk audits yet?</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>Would love to chat if you guys would be interested in having someone review potential attack vectors like oracle manipulation and the current interest rate model for revolving loans</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>we haven't had any economic risk audits yet</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>but we also don't have oracles</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>ah right, sorry i keep thinking there has to be some oracle usage when closing out positions</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>Would still like to chat and get better understanding of InfinityPool if the team would be open to it!  \n\nFor context, I'm reaching out on behalf of a DeFI Risk collective called SmolQuants. We build open source risk tools for DeFI protocols and offer economic risk reviews as an add-on service\n\nMost of our tools and  current work is open-sourced, feel free to take a look and lmk if any interest 🙏 \n\nhttps://github.com/smolquants</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>yeah happy to chat</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>Can infinitypools use ALL other LP pairs (whichever DEX as them) of ETH:USDC-LP ? arent there some composability issues? or are there all standards out there</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>feel free to DM 🙂</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>not sure i understood your question can you elaborate?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>in regards of you can source your own LP-tokens to pay of the loan for when you close the position as a borrower, arent there some constraints in which LP you can give?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>as in of which DEX?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>As in you borrow uni V3 ETH:USDC at 1000, its now at 1100, you wanna close with profit, but see on sushi an same worth LP but its only $1090, can you then opt to give the sushi LP?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>thought I read in whitepaper that you can source your own LP for closing positions to give users way to arb no&gt;?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>or do you *only* use uni V3 LP-tokens, and on one chain only to keep LP-positions and tokens in check and not break?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>maybe the better question would be: Can the liquidity range minted with reserves for swaps also utilise other LP-pairs other than the one it was created with? or workt otgether with other LP-sources?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>or is it only looking into one smart contract pair of UNI (i.e. ETH:USDC) and fragmented Concentrated liquidity zones (LEAVING ALL OTHER DEX LP-TOKENS EXCLUDED), this would answer by question basically i guess</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>with other LP-sources I mean not entirely differtent pairs btw. just ETH:USDC but from another DEX</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>is this elaboration enough? 😛</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>do you mean $990 here?</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>the previous LP would be expecting up to $1000 right (+fees)? Even when price was higher since that was the top of their range</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>yeh the excess is +PnL of borrower</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>so 100-fees</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>but could make 10$ more if I had access to supply ETH:USDC from Sushi pair this way</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>and my question is, are same LP-positions (ETH:USDC LP-token) of different smart contract pairs, composable/compatible or not?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>or compatible</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>yea good question, since in general they can be aggregated it should be possible but it's an implementation detail</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>as a LP ragne is minted form a reserve, my question arose</td>
+    </tr>
+    <tr>
+      <td>Subzer0</td>
+      <td>because theoretically you could even move it from one protocol to the other if that was needed as you have the underlying token0 and 1</td>
+    </tr>
+    <tr>
+      <td>zygomeb</td>
+      <td>technically speaking multipools would also be able to be used for a composite position building if there were a V3 multipool equivalent</td>
+    </tr>
+    <tr>
+      <td>zygomeb</td>
+      <td>the only one on the market I'm aware of is curve but there's not much use for leveraging into stable pairs</td>
+    </tr>
+    <tr>
+      <td>JackS</td>
+      <td>ty pls accept fren request 🙂</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>I see, so only for other (same ETH:USDC LP-tokens) of other v3 (concentrated liquidity contract addies?) so if sushi also has ETH:USDC LP-token i could buy that too to close the position i borrowed from uni V3 lender?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>but basically this question: \n\nare same LP-positions (ETH:USDC LP-token) of different smart contract pairs (i.e UNI and SUSHI), composable/compatible with infinitypools for 1 single minted liquidity range, or not?</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>yes or nah? 😛</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Ultimately the liquidity borrowed in InfinityPools is collateralised at all times and repaid in token0 or token1 of its pool, at the choosing of the borrower. Therefore it is possible to repay liquidity borrowed in ETH:USDC with tokens coming from liquidity borrowed in a OTHER:USDC InfinityPool (or similarly ETH:OTHER).</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>I see, thanks Noegen ❤️</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>seems answer is yes. which ofc seems logical as you can swap for endquote anyway, as long as LP-er gets their stuff</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>But you do need collateral for that to first pay off entire position, I guess you cant swap the minted liquidity range, unmint it and mint again with difference of the other LP. As in you cant swap the earlier LP for a new minted range based on the arb you got.</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>ahhhh im mumblingggg, gief testnet</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The trader can never unmint the liquidity to get "direct" access to its tokens (as that would be bad in a permissionless setting). If eg. you use the USDC from OTHER:USDC liquidity to repay an ETH:USDC loan, then of course you also have to find some OTHER to collateralise/repay your OTHER:USDC loan.</td>
+    </tr>
+    <tr>
+      <td>Herres</td>
+      <td>ahh yeh makes a lot of sense. thanks for the explainer, think I got it now. Super cool concept. Really like the way you guys handle this composably with LP-pairs instead of options and volatility products to enhance LP' ers</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>How does the protocol query bunch of liquidity and find the best rate for that order "on chain"? Is there any off chain component that's required?</td>
+    </tr>
+    <tr>
+      <td>Alphagate | Humble</td>
+      <td>Is there any link online for this?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The best rate is found off-chain, to not waste gas. The trader then borrows that particular range as part of their transaction.\nAnybody can compute the range giving the best rate, as eg. an iterative search works fine. The UI will do it for you in any case.</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>https://tinyurl.com/2p9ehrc7</td>
+    </tr>
+    <tr>
+      <td>Alphagate | Humble</td>
+      <td>This downloads the pdf fren, is there any way to view it online?</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>Sorry I still don't fully understand this after asking so many questions but I feel I'm getting close!\n\nWhen trader open 1 eth long with 100 collateral, assume price didn't change and it's been a day, trader didn't do anything so 0.5 eth unwond. What happen to another half? Will there be some keeper to send a tx and convert the unwond part (0.5eth) to 500 usdc, repay 450 to pool and leave 50 for traders collateral? I ignore interest rate in this case</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>After so many questions, you must write down an overview of the project 😂</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Hi fren. I hope you slept well and are full of energy &lt;:4218pepesuit:1072138630031757325&gt;</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>No worries. The other half of the trade is still open, so that position remains.\nRight, you're asking if there is a keeper bot needed to re-create the liquidity range (with USDC reserves), using the ETH from the unwind. There is not. The contract does this itself, in continuous time.</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>I thought both can't exist at the same time? If the unwond position remains, it will be 0.5 eth, if it continuesly converting to liquidity range which is usdc reserves, then it's in usdc, how can they coexist?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>I just meant the other half which is not unwound remains as-is. The unwound half unwinds to 0.5 ETH after a day (which happens progressively/continuously throughout the day), and it is that ETH which is swapped to USDC in the float pool, before re-creating the liquidity range (the liquidity range is also recreated at the same time, ie. progressively throughout the day).</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Operating in continuous time so explicitly is something fairly novel, even in DeFi, so can take some getting used to. You can always think of it as a periodic discrete time process (as it would be with a keeper bot), which just happens with high frequency, if that help, as that would be equivalent.</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>You mentioned renew the position can be done in ui, if trader want to maintain the same exposure and replenished every hour, how can this work automatically? Again thanks for your patience, it's really mind blowing</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>I understand that the interest rates that a trader pays depend on the utilization of the liquidity in the pools, pool price etc. But I'm curious if you have any rough estimates on what the expected interest rates will be for traders as a function of utilization?</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>need to read the WP but a quick question: The leverage ratio is dependent on tightness of the ticks on v3 yes? Would the protocol have attempt to standardise ticks to join fragmented liquidity?</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>seems like with smaller tick size, the theoretical leverage goes up, as the amount a trader can lose from top tick to bottom tick decreases</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Yes the smaller the tick the higher the implied leverage</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>But Im just wondering in implementation</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Liquidity would be highly fragmented no?</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Since you can offer 1-1000x leverage</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>On any shitcoin on v3</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Depends how many ticks your LP NFT crosses, and the minimum tick size. `3 ticks = max_leverage / 3`</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>I believe this requires current price to equal the top tick of the NFT as well for theoretical max leverage</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>If the top tick of the NFT is less than current price, then you can lose more for that LP NFT holder by cashing out their LP token</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Wouldnt implied lev also depend on the price of the token when opening posit</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>seems like `(current price - bottom tick) * amt` is the max lev for a specific LP NFT. If that's $100 of possible max loss, then you need to collateralize $100 to cash out their position + pay them interest</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Perhaps some sort of pooled model can be devised where traders can open positions against the pool, and the ideal tick min/max is generated on the spot</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Interesting</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>It does remind me somewhat of options</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Since you pay upfront the max loss</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>V3 already is an options ish protocol tbf</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>this seems very keeper intensive though, don't you need to "liquidate" once the ETH price has gotten to the bottom tick? Otherwise it seems you can exceed max loss</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>if you cash out a $900-$1000 LP where amt=1 eth and current price = $1,000. You now hold 1 ETH, and put $100 of collateral for max loss. But ETH flash crash to $800. Now you gotta cover &gt; max loss right? Seems like LP lose here. Maybe I don't understand something</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes. There will be one InfinityPool per token pair, rather than multiple with different tick sizes and fee levels.</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>If ETH flash crash to $800, u still have the 1ETH + $100 to pay back. At most you'll need to pay back 1.11 ETH, so LP don't lose anything</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Oh, right cause the LP would expect to hold all ETH at $800/ETH. All the USDC liquidity was used</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>I like you grengar what's your Twitter</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Gengar</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>https://twitter.com/GengarGod007</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Thanks ser, followers for the poor</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Wait but if there's one pool per ticker then leverage is also fixed? Since V3 are nfts</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>&lt;:pepehandshake:1024682061493190726&gt;</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Nvm I see it in general</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Wow bro who thought of this shit</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Your brain must be wired backwards</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>But the protocol is basically all the Univ3 downside for LPs, but instead of the upside, it's an interest rate instead?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>I'll take that as a compliment 🤣</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>&lt;a:catthumbup:963554001729773619&gt;</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>In the backrest do we have a rough ballpark of funding rates</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Same upside and same downside as Uni.v3 LP. Two sources of yield instead of one though: both lending interest and swap fees.</td>
+    </tr>
+    <tr>
+      <td>rt</td>
+      <td>curious to see the derivation for fair value of interest rate, is there some sort of appendix?</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>im curious about this too. seems like this would determine whether this would be competitive with other perp venues. on other perp dex (e.g. dydx), their funding rates are often clamped to some max value, but it seems like we don't have that here</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>swap fees still, even tho the LP was cashed out for the chosen asset? Seems like the LP is not LPing once the position is taken</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Not too sure if dydx if the right comp tbh</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Due to liquidations etc</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Maybe better comps are leveraged tokens and opyn long only bastard</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Which itself is half option half perp</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, cannot get swap fees while liquidity is on loan, but it's additive in the sense that if you lend out liquidity and the price does not go in range while on loan, then you get interest + 0 (0 fees which you would have gotten in any case)</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>i understand that there's liquidations so it's not exactly the same. But if ur taking the perspective of a trader who just wants to trade with leverage then a perp would be the comparison. You don't have to compare with dydx and can compare with binance perps. All other cases like opyn etc have way too small of a market to be meaningful</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Agreed in that case we need to append a premium on funding to these on the account of no liquidation</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Also I wonder if there's any thing like beta slippage as we see in leveraged tokens</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Due to daily pegging</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>yeah, i'm curious what that difference between the funding rate is to account for no liquidations. if it's high, i can imagine traders still choosing the liquidation route.. if a trader's long and price goes down, it's still bad for the trader its like bad vs very bad(getting liquidated)</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>But also max lev is highly different</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Other than rollbit idk where else you can get 1000x</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>And that's a casino</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Bitmex is 100</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Dydx is 25-50?</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>Gns is 50-100</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>the total leverage here is somewhat capped as well based on the amount of LP providing liquidity though. Whereas there isn't really that same hardcap in the typical case. is my understanding right here?</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>like u can't borrow $100M if there isn't already $100M deposited on the LP side</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The interest cost on InfinityPools is actually fairly small for leverage levels available from perps (up to 20x say, as on dYdX https://help.dydx.exchange/en/articles/4797403-maximum-leverage-for-perpetuals).</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>what would the ballpark numbers be for say a 10x leverage trade on a large market like BTC/ETH?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>There is a limit to feasible position size in all markets, but position size isn't the same as leverage ratio.</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>is my understanding above correct that the max amount borrowed is about equivalent to the total LP deposited?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>0.1% interest per day for markets such as BTC/USDC or ETH/USDC.</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>gotcha, thats not terrible but still higher than the typical rate on most perp venues</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, that is correct. The issue with leverage using perpetuals (and other forms of margin trading) is that the liquidation kills your expected return very quickly. We ran the numbers and the expected return peaks at 10x, going negative before reaching 20x: https://discord.com/channels/1070477782922035210/1071050376217899038/1072616197121642597 (dYdX looked at here specifically, other venues similar)</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>yeah that makes sense. which is why i doubt that many in most venues except the absolute degens use leverage &gt;20x for meaningful trades. But since there aren't liquidations I could see users using &gt;20x leverage</td>
+    </tr>
+    <tr>
+      <td>hazucf</td>
+      <td>lends nicely to the current demographics in crypto, too (degens)</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>By the way the analysis just mentioned takes into account the InfinityPools interest rate, but assumes the perpetual funding rate is zero. So interest rate on InfinityPools is not really comparable to funding rate, closer to option premium.</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>Also, how does the upfront interest payment work? Let's say I want to borrow $1,000 at 10x leverage. My understanding is that I would have to pay the interest rate upfront based on some time frame? Let's say I choose 10 days so I pay 0.1%*10=1% (assume 0.1%/day interest), so I deposit the $10 + the $100 collateral (assume no fees)\n\nWhat happens if I end up borrowing for &gt; 10 days? Does my position get closed and it all gets returned to the LP? or does the interest just slowly eat into my collateral? and thus increasing the leverage of my trade?</td>
+    </tr>
+    <tr>
+      <td>Kendall</td>
+      <td>If there are no liquidations, does that mean borrowed assets cannot leave the protocol outside of a flash loan-type scenario (paid back by end of block)?</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>correct, but its also more powerful than a flash loan within a single block because you can pay it back in a mix of the two assets in the pool</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>I guess you're assuming the trade is not profitable - if it's a winning trade, you can replenish the position to keep it open, no problem. In case you run out of capital, you can choose how to replenish the position, if at all. Generally UI isn't going to push you into higher leverage, so you can expect your position size to be reduced rather.</td>
+    </tr>
+    <tr>
+      <td>Ace.</td>
+      <td>Hello what's the github repo for infinityPools project ?</td>
+    </tr>
+    <tr>
+      <td>tcs</td>
+      <td>thanks that makes sense!</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>not open sourced yet!</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>That is, the loan can be repaid in other tokens?</td>
+    </tr>
+    <tr>
+      <td>natonamco</td>
+      <td>Hi! I've read the whitepaper and I do not understand what would happen on the first example if the liquidity position is not concentrated. If a trader holds 1.11 ETH (which is long position + collateral) and they want to close the position when the pool price is in the middle of the range they will have to return certain amount of ETH + USDC. How does the trader gets those USDC? Isn't there a scenario where the total amount of ETH is not enough to re-create the LP?</td>
+    </tr>
+    <tr>
+      <td>Luc</td>
+      <td>Hi all i have a question on step 3. Since there's no liquidations, what happens if the price of the asset goes way bellow the liquidity range? like in a flash crash</td>
+    </tr>
+    <tr>
+      <td>hazucf</td>
+      <td>https://discord.com/channels/1070477782922035210/1071050376217899038/1072938704731131995</td>
+    </tr>
+    <tr>
+      <td>Luc</td>
+      <td>But in that case where eth goes to 800, i only have 1 eth plus 100 collateral. Would i have to deposit anothet 100 to pay it back? Since the provider gave 1000 usdc, would he expect the 1000 usdc back?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The LPer expects ETH back, not USDC, with a pool price of 800, below the price of their LP range (of 900).  This is the standard behaviour of AMM liquidity, in Uniswap v3, etc.</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Yes, it leverages the fact that Uni LPs take capped upside and unlimited downside in exchange for fee revenue. \n\nSince Uni LPs already are willing to take unlimited downside, you can do liquidationless leverage trading. Liquidation protects counterparties from downside, but Uni LPs want that shit 😄</td>
+    </tr>
+    <tr>
+      <td>GengarGod007</td>
+      <td>Leverage traders will take the unlimited upside (that the Uni LPs are capping), in exchange for more fees</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>There is no such scenario in fact, because either the pool price is above 900, in which case the ETH can be sold for more USDC than needed to re-create the LP range, or the pool price is below 900 and the LP range expects ETH (1.11 ETH precisely) as reserves anyway. The intermediate case of pool price in the middle of the range also works because as you sell ETH for USDC in the pool, its price goes down, and when pool price goes down, the LP range requires a smaller proportion of USDC, so there is a point where the USDC available (increasing) and required (decreasing) match up.</td>
+    </tr>
+    <tr>
+      <td>varoques3</td>
+      <td>Uniswap has a v3?</td>
+    </tr>
+    <tr>
+      <td>varoques3</td>
+      <td>oh i see nvm</td>
+    </tr>
+    <tr>
+      <td>natonamco</td>
+      <td>If I get what you mean you are saying that when the pool price is inside the range, you will always be able to sell enough ETH for USDC to cover for the LP position USDC percentage? I was wondering if at some point there is no such case. I think that what you're saying is true 100% of the times because your execution price when swapping ETH for USDC will always be higher than the price of the pool at the end of your swap, so you would be able to return the funds at the correct %.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, that's a good way to see it. The whitepaper actually uses a different approach to prove the same. The more ways of understanding things the better.</td>
+    </tr>
+    <tr>
+      <td>natonamco</td>
+      <td>I'm assuming you swap and return the debt on the same tx</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>That's right. Not even its own transaction actually - this happens in the background together with other TXs.</td>
+    </tr>
+    <tr>
+      <td>Va</td>
+      <td>where could i found the math part here?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Expect more information in the future sir. Follow the announcements and you will find something useful in WP, which can be found here &lt;#1070522471146602516&gt;</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>What maths are you looking for?</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>2*(3+5)= ?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>For that just ask ChatGPT, I hear it can give answer within ±10, lol</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>😁</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>fixed</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>https://tenor.com/view/calculation-math-hangover-allen-zach-galifianakis-gif-6219070</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>By the way, he looks like an InfinityPool trader</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>There's a carrier pigeon coming your way. Could you meet him?</td>
+    </tr>
+    <tr>
+      <td>Va</td>
+      <td>how to calculate ur getAmountIn and ur getAmountoUT</td>
+    </tr>
+    <tr>
+      <td>Va</td>
+      <td>where can i read contract of infinity pool</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Contract will be ready soon. Testnet is slated for end Feb / early March.</td>
+    </tr>
+    <tr>
+      <td>Vasily</td>
+      <td>hi, reading the white paper, &lt;@971895533293699072&gt; &lt;@398981062262521858&gt; , the payoff diagrams are mostly equivalent to long/short put options that don't expire, is it possible to do calls with infinity pools?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, payoff for the trader (=borrower) looks like long put or long call, while payoff for LPs is like short put option. Actually you can find in Fig. 4 of the whitepaper that the payoff for the trader starts off like a long put (out of the money), and becomes a long call (in the money) once the reserves are exchanged (from USDC to ETH). This is how the trader gets 10x long exposure.\nOn the other hand if you want an out-of-the-money call, you can borrow an LP range which is above the pool price (eg. at 1100 rather than 900, in the scenario of ETHUSDC price at 1000). This already comes with ETH reserves, so no need to exchange the reserves at all, you will be able to take profit at any price above 1100.</td>
+    </tr>
+    <tr>
+      <td>Vasily</td>
+      <td>when you say 1100 range, do you mean like a very concentrated range like 1099-1101 or 1000-1100</td>
+    </tr>
+    <tr>
+      <td>Va</td>
+      <td>nice to hear, any technical documentation please?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Either narrow or wide range will work. Usually we assume very tight ranges in example scenarios, because it removes a (not important) degree of freedom, but wider ranges work similarly. 'At 1100' is short for 'centred at 1100' though, so you would want 1050-1150 (rather than 1000-1100)</td>
+    </tr>
+    <tr>
+      <td>marco_112358</td>
+      <td>for wider ranges, i assume leverage factor decreases. is there also some type of slippage when the price is inside the range? struggling to think through the curvature of CPMM for sufficiently wide ranges</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Just whitepaper at this stage (pinned comment). Discord is open just 2 days ago, so definitely stay tuned for more.</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>That's right, leverage factor decreases as centre of range moves away from pool price (which necessarily happens for wide ranges). If you're asking about price inside the range when the LP range is borrowed, that is actually not allowed. It is just a technical limitation though as you can always borrow such an LP range by splitting it into two: a range above and one below the pool price.</td>
+    </tr>
+    <tr>
+      <td>marco_112358</td>
+      <td>Got it. I still need to digest the WP more lol. I am still unsure if there is any issue if you borrow a wide range (say 2000-2500 ETHUSDC) when ETHUSDC currently at 1500, go short ETH (swap ETH from LP into USDC) and then the price jumps to say 2200. Is there any issues there if the position is then closed? I guess not. The LP will be some combination of USDC and ETH. The borrower will just have to use their collateral plus swap back some amount of ETH for USDC (since they wont have lost 100% of their position).</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, that is the other way price can be in range. This is guaranteed to work because you can (conceptually) put the liquidity range into an empty pool, arb. any price difference between this and the actual pool - so now prices are in line, and the liquidity range can be added to the pool.</td>
+    </tr>
+    <tr>
+      <td>byyou</td>
+      <td>found the mev searcher 🤣</td>
+    </tr>
+    <tr>
+      <td>Ace.</td>
+      <td>is there any way to view the WP online? I'm not going to download your pdf</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>https://tinyurl.com/y32a7jcc</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>https://tinyurl.com/y32a7jcc</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>https://tinyurl.com/y32a7jcc</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>Here you go!</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>Whitepaper viewable online</td>
+    </tr>
+    <tr>
+      <td>Ace.</td>
+      <td>Thank you!</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>Want to go through an example to see if I understand it correctly:\n\nIn whitepaper example, trader open 1 eth long at price 1000 with 100 usdc colateral \n1. If price remain the same for 24 hours, can trader withdraw half of his colareral50 usdc if he didn't replenish?\n2. If price go up to 1100 right after the trade, then it keep the same price until 24hours after the trade, how much collateral trader can withdraw? Is it (collateral+realized pnl) ×50% =100?\n3. Continue from 2, if trader want to replenish his position, he can use the 100 usdc from step 2, open 0.5 eth at $1100 for the new loan, then the strike price for new loan will be around $990\n\nAm I correct?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Yes, all accurate 👍. Only detail is that some of the collateral available for withdrawal will be in ETH, which can certainly be used for replenishing, so #3 works as you expect.</td>
+    </tr>
+    <tr>
+      <td>Radahn</td>
+      <td>Thank you! One follow up question,if it's a 2 day fixed term loan ( I don't know how/who to set the term but I assume it's trader), after the loan is fully expired, trader wirhdraw 100 collateral, pnl =0, what happen to this 1 eth spot? Who's gonna convert it back to liquidity with 1000 usdc in$900 range? Even protocol can do this continuesly but don't we need a keeper to settle? If no transaction for it, I guess 1 eth is not enough for adding back to liquidity if price go down below 900?</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The 1 ETH gets converted back to USDC, to re-create the liquidity range, by swapping through the float pool (spot DEX part of the InfinityPool). This process indeed happens continuously. In order to account for it, there is no need for transactions to happen continuously on chain though - whenever a transaction happens, the contract computes the flow of tokens which went in and out of the float pool since the last transactions. Bringing the state of the contract forward in time up to the current block timestamp, so to speak.\nThe reason why the collateral is sufficient to recreate liquidity remains the same. If the price goes below 900 for example, the LP expects ETH as reserves anyway, so no swap is needed, and float pool isn't used at that point.</td>
+    </tr>
+    <tr>
+      <td>Bryan</td>
+      <td>Anyone have the whitepaper link handy?</td>
+    </tr>
+    <tr>
+      <td>Bryan</td>
+      <td>Nm - https://tinyurl.com/y32a7jcc</td>
+    </tr>
+    <tr>
+      <td>mir</td>
+      <td>okay sers, this is pretty cool. Innovation is often elegant and this sounds cool, can understand the big claims on website now</td>
+    </tr>
+    <tr>
+      <td>Matthieu</td>
+      <td>&lt;:6828stonks:1072138648998391858&gt;</td>
+    </tr>
+    <tr>
+      <td>G⭕d-Level -</td>
+      <td>how can we get on early on this</td>
+    </tr>
+    <tr>
+      <td>Ixela</td>
+      <td>Hey buddy. Start by studying the protocol &lt;#1070522471146602516&gt;</td>
+    </tr>
+    <tr>
+      <td>alphaist</td>
+      <td>What is difference between panoptic and infinity pools. You have similar mechanisms. But different branding</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>Panoptic moves liquidity to different prices in the pool, which gives a payoff like an option spread (looks like option payoff, except capped, ie. limited upside). InfinityPools takes liquidity out of the pool altogether, giving traders an option-like payoff (unlimited upside).</td>
+    </tr>
+    <tr>
+      <td>noegen</td>
+      <td>The difference in branding reflects the difference in fundamentals of each system, eg. a payoff with limited upside is not a substitute for leveraged positions such as perps.</td>
+    </tr>
+    <tr>
+      <td>0xBirds.goblin</td>
+      <td>so panoptic is more option spreads in terms of payoff while infinity pools is more naked long options?</td>
+    </tr>
+  </tbody>
+</table>
