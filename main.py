@@ -35,7 +35,7 @@ def createHtmlFromCSV(csvFilePath):
     for i in range(len(df)):
         if pd.isna(df["Content"][i]):
             continue
-        html += "<p>" + df["Username"][i] + ": " + df["Content"][i] + "</p><br>"
+        html += "<p>" + df["Username"][i] + ": " + df["Content"][i] + "</p>"
     html += """
     </table>
     </body>
@@ -61,6 +61,5 @@ if __name__ == "__main__":
             pyperclip.copy(urlToOpen)
         else:
             urlToOpen = htmlFilePath
-        os.remove(csvFilePath)
         subprocess.run(["xdg-open", urlToOpen])
-        
+        os.remove(csvFilePath)
