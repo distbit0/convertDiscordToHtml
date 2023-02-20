@@ -7,6 +7,7 @@ import socket
 import pyperclip
 import subprocess
 import os
+import re
 
 def getAbsPath(relPath):
     basepath = path.dirname(__file__)
@@ -24,9 +25,13 @@ def getConfig():
 
 def createHtmlFromCSV(csvFilePath):
     df = pd.read_csv(csvFilePath)
+    firstMsg = re.sub(r"[^a-zA-Z ]", "", str(df["Content"][i]))
+    firstMsg = firstMsg.lower()[:100]
+
     html = """
     <html>
     <head>
+    <title>""" + firstMsg + """</title>
     <style>
     </style>
     </head>
